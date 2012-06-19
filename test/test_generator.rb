@@ -139,14 +139,5 @@ end
     assert_equal expected, @generator.spec_context
   end
   
-=begin
-  test 'generate foo.rb' do
-    ARGV.replace %w(generate model foo)
-    @generator.execute
-    assert_equal expected, File.read()
-  end
-=end
-
-
 end
 
