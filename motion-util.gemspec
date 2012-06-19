@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Motion::Util::VERSION
   s.authors     = ["Katsuyoshi Ito"]
   s.email       = ["kito@itosoft.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/katsuyoshi/motion-util"
   s.summary     = %q{Convenient command set for Ruby Motion.}
   s.description = %q{It generate class and spec files.}
 
