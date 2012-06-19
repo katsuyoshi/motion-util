@@ -42,34 +42,34 @@ module Motion
         c
       end
 
+    
+    
+      private
+      
+      def file_type
+        case ARGV[1]
+        when /model/i, /controller/i, /view/i
+          @file_type = ARGV[1].downcase
+        else
+          @file_type = "general"
+        end if @file_type.nil?
+        @file_type
+      end
+      
+      def class_name
+        case file_type
+        when :general
+          @class_name = ARGV[1].capitalize
+        else
+          @class_name = ARGV[2].capitalize
+        end if @class_name.nil?
+        @class_name
+      end
+      
+      def class_file_name
+        class_name.downcase
+      end
+      
     end
-    
-    
-    private
-    
-    def file_type
-      case ARGV[1]
-      when /model/i, /controller/i, /view/i
-        @file_type = ARGV[1].downcase
-      else
-        @file_type = "general"
-      end if @file_type.nil?
-      @file_type
-    end
-    
-    def class_name
-      case file_type
-      when :general
-        @class_name = ARGV[1].capitalize
-      else
-        @class_name = ARGV[2].capitalize
-      end if @class_name.nil?
-      @class_name
-    end
-    
-    def class_file_name
-      class_name.downcase
-    end
-    
   end
 end
