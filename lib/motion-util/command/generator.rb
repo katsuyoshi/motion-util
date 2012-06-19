@@ -94,7 +94,7 @@ module Motion
       
       def class_name
         case file_type
-        when :general
+        when "general"
           @class_name = ARGV[1].capitalize
         else
           @class_name = ARGV[2].capitalize

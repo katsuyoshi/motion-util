@@ -57,6 +57,11 @@ class TestGenerate < Test::Unit::TestCase
   end
   
 
+  test "destination_path shoudle be 'app/foo.rb' with foo" do
+    ARGV.replace %w(generate foo)
+    assert_equal "app/foo.rb", @generator.destination_path
+  end
+  
   # --- context
   test "check model file context" do
     ARGV.replace %w(generate model foo)
