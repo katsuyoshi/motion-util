@@ -51,6 +51,12 @@ class TestGenerate < Test::Unit::TestCase
     assert_equal "app/controller/foo_tab_bar_controller.rb", @generator.destination_path
   end
   
+  test "spec_destination_path shoudle be 'spec/controller/foo_tab_bar_controller.rb' with tab_bar_view_controller, foo" do
+    ARGV.replace %w(generate tab_bar_controller foo)
+    assert_equal "spec/controller/foo_tab_bar_controller_spec.rb", @generator.spec_destination_path
+  end
+  
+
   # --- context
   test "check model file context" do
     ARGV.replace %w(generate model foo)

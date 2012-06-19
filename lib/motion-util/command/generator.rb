@@ -7,6 +7,7 @@ module Motion
       def initialize
         d = File.dirname(__FILE__).split("/")[0..-4]
         d << "template"
+        @project_path = Dir.pwd
         @template_dir = File.join d
       end
     
@@ -30,6 +31,11 @@ module Motion
         end
       end
       
+      def spec_destination_path
+        d = destination_path.gsub /^app/, "spec"
+        d.gsub /\.rb$/, "_spec.rb"
+      end
+      
       def context
         c = File.read File.join(@template_dir, "class", file_type + ".rb")
         c.gsub! /#\{class_name\}/, class_name
@@ -43,8 +49,38 @@ module Motion
       end
 
     
+      def run
+        make_file
+        make_spec_file
+      end
     
       private
+      
+      def make_file
+        d = File.join @project_path, destination_path
+        unless File.exist? d
+          FileUtils.mkdir_p File.dirname(d)
+          File.open(d, "w") do |f|
+            f.write context
+          end
+          $stdout.puts "\tcreate: #{destination_path}"
+        else
+          $stderr.puts "#{destination_path} is already created!"
+        end
+      end
+      
+      def make_spec_file
+        d = File.join @project_path, spec_destination_path
+        unless File.exist? d
+          FileUtils.mkdir_p File.dirname(d)
+          File.open(d, "w") do |f|
+            f.write spec_context
+          end
+          $stdout.puts "\tcreate: #{spec_destination_path}"
+        else
+          $stderr.puts "#{spec_destination_path} is already created!"
+        end
+      end
       
       def file_type
         case ARGV[1]

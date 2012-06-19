@@ -4,9 +4,6 @@ module Motion
 
     class Dispatcher
     
-      attr_reader :project_dir
-      
-      
       # --- class methods
       class << self
       
@@ -28,16 +25,15 @@ Usage:
       
       
       # --- instance methoods
-      def initialize
-        @project_dir = Dir.pwd
-      end
-      
-      def dispatch
-        begin 
-          cmd = eval("#{ARGV[0].captalize}.new")
-        rescue
+      def run
+        cmd = nil
+        case ARGV[0]
+        when "generate", "generator", "g"
+          cmd = Generator.new
         end
-        if cmd.nil?
+        if cmd
+          cmd.run
+        else
           $stderr.puts self.class.usage 
           exit
         end

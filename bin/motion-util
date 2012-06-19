@@ -4,4 +4,20 @@
 require 'rubygems'
 require 'motion-util'
 
+
+Version = Motion::Util::VERSION
+
+opt = OptionParser.new
+
+opt.banner = Motion::Util::Dispatcher::usage
+
+
+argv = opt.parse(ARGV)
+
+if argv.size == 0
+  argv.unshift "--help"
+  argv = opt.parse(argv)
+  exit
+end
+
 Motion::Util::Dispatcher.dispatcher.run
