@@ -4,6 +4,12 @@ module Motion
 
     class Generator
     
+      def initialize
+        d = File.dirname(__FILE__).split("/")[0..-4]
+        d << "template"
+        @template_dir = File.join d
+      end
+    
       def destination_dir
         case file_type.to_s
         when "general"
@@ -24,6 +30,18 @@ module Motion
         end
       end
       
+      def context
+        c = File.read File.join(@template_dir, "class", file_type + ".rb")
+        c.gsub! /#\{class_name\}/, class_name
+        c
+      end
+
+      def spec_context
+        c = File.read File.join(@template_dir, "spec", "spec.rb")
+        c.gsub! /#\{class_name\}/, class_name
+        c
+      end
+
     end
     
     
