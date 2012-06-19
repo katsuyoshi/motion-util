@@ -2,7 +2,7 @@
 describe #{class_name} do
 
   it "should be successful" do
-    true.should be_true
+    true.should == true
   end
 
 end
