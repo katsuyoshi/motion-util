@@ -4,4 +4,4 @@
 require 'rubygems'
 require 'motion-util'
 
-Motion::Util.dispatch
+#Motion::Util.dispatch

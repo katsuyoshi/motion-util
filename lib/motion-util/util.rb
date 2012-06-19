@@ -2,14 +2,40 @@
 module Motion
   module Util
 
-
-    def self.dispatch 
-      cmd = eval("#{ARG[0].captalize}.new")
-      if cmd.nil?
-        puts 
-        exit
+    class Dispatcher
+    
+      attr_reader :project_dir
+      
+      def self.dispatcher
+        @@despatcher ||= self.new
       end
-    end
 
+      def initialize
+        @project_dir = Dir.pwd
+      end
+      
+      def self.dispatch
+        begin 
+          cmd = eval("#{ARGV[0].captalize}.new")
+        rescue
+        end
+        if cmd.nil?
+          $stderr.puts usage 
+  #        exit
+        end
+      end
+      
+      def usage
+        <<EOF
+Usage:
+motion-util: command [options]
+
+Usage:
+
+EOF
+      end
+
+    end
+    
   end
 end
