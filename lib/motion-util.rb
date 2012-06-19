@@ -3,13 +3,14 @@ require "optparse"
 
 require "motion-util/version"
 require "motion-util/util"
+require "motion-util/command/generator"
 
 
 Version = Motion::Util::VERSION
 
 opt = OptionParser.new
 
-opt.banner = Motion::Util::Dispatcher.dispatcher.usage
+opt.banner = Motion::Util::Dispatcher::usage
 
 
 argv = opt.parse(ARGV)

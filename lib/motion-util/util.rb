@@ -6,35 +6,43 @@ module Motion
     
       attr_reader :project_dir
       
-      def self.dispatcher
-        @@despatcher ||= self.new
-      end
+      
+      # --- class methods
+      class << self
+      
+        def dispatcher
+          @@despatcher ||= self.new
+        end
 
-      def initialize
-        @project_dir = Dir.pwd
-      end
-      
-      def self.dispatch
-        begin 
-          cmd = eval("#{ARGV[0].captalize}.new")
-        rescue
-        end
-        if cmd.nil?
-          $stderr.puts usage 
-  #        exit
-        end
-      end
-      
-      def usage
-        <<EOF
+        def usage
+          <<-EOF
 Usage:
 motion-util: command [options]
 
 Usage:
 
-EOF
-      end
+          EOF
+        end
 
+      end
+      
+      
+      # --- instance methoods
+      def initialize
+        @project_dir = Dir.pwd
+      end
+      
+      def dispatch
+        begin 
+          cmd = eval("#{ARGV[0].captalize}.new")
+        rescue
+        end
+        if cmd.nil?
+          $stderr.puts self.class.usage 
+          exit
+        end
+      end
+      
     end
     
   end
