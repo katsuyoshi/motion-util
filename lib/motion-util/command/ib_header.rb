@@ -2,28 +2,26 @@
 module Motion
   module Util
 
-    class IbHeader
-    
-    
-      class << self
-      
-        def generate
-          project_dir = Dir.pwd
-          dst_dir = File.join project_dir, "tmp", "header"
-          FileUtils.mkdir_p dst_dir
-          Dir.glob("app/**/*.rb") do |f|
-            ib = self.new
-            ib.source = File.read(f)
-            dst_name = ib.dst_name_of f
-            dst = File.join(dst_dir, dst_name)
-            FileUtils.mkdir_p File.dirname(dst)
-            File.open(dst, "w") do |f|
-              f.write(ib.context)
-            end
+    class IbHeaderGenerator
+      def run
+        project_dir = Dir.pwd
+        dst_dir = File.join project_dir, "tmp", "header"
+        FileUtils.mkdir_p dst_dir
+        Dir.glob("app/**/*.rb") do |f|
+          ib = IbHeader.new
+          ib.source = File.read(f)
+          dst_name = ib.dst_name_of f
+          dst = File.join(dst_dir, dst_name)
+          FileUtils.mkdir_p File.dirname(dst)
+          File.open(dst, "w") do |f|
+            f.write(ib.context)
           end
         end
       end
-      
+    end
+    
+    class IbHeader
+    
       attr_reader :class_name, :super_name, :properties
       
       def source= source
@@ -36,9 +34,9 @@ module Motion
         lines << "@interface #{@class_name} : #{@super_name || 'NSObject'}"
         properties.each do |k, v|
           if v[:readonly]
-            lines << "@property (strong, nonatomic, readonly) #{type_name_of v[:type]}#{k};"
+            lines << "@property (strong, nonatomic, readonly) IBOutlet #{type_name_of v[:type]}#{k};"
           else
-            lines << "@property (strong, nonatomic) #{type_name_of v[:type]}#{k};"
+            lines << "@property (strong, nonatomic) IBOutlet #{type_name_of v[:type]}#{k};"
           end
         end
         lines << "@end"
