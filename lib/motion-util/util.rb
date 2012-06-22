@@ -14,9 +14,13 @@ module Motion
         def usage
           <<-EOF
 Usage:
-motion-util: command [options]
+motion-util: command [subcommand] [options]
 
-Usage:
+command:
+  generate    Generate class and spec files.
+              You can use g or generator instead of generate.
+  ib_header   Generate Objective-C header files for Interface Builder.
+              You can use ibh instead of ib_header.
 
           EOF
         end
@@ -30,6 +34,8 @@ Usage:
         case ARGV[0]
         when "generate", "generator", "g"
           cmd = Generator.new
+        when "ib_header", "ibh"
+          cmd = IbHeaderGenerator.new
         end
         if cmd
           cmd.run
