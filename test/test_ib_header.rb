@@ -60,6 +60,25 @@ class TestIbHeader < Test::Unit::TestCase
     assert_equal( { foo: { type: "NSString *" }, bar: { type: "NSString *"} }, @ib.properties )
   end
   
+  test "context" do
+    @ib.source = <<-EOF
+class Foo
+  attr_accessor :foo # no type
+  attr_accessor :bar # @type_info UILabel
+  attr_reader :hoge # @type_info UIView
+end
+    EOF
+    
+    expected = <<-EOF
+@interface Foo : NSObject
+@property (strong, nonatomic) id foo;
+@property (strong, nonatomic) UILabel *bar;
+@property (strong, nonatomic, readonly) UIView *hoge;
+@end
+    EOF
+    
+    assert_equal expected, @ib.context
+  end
   
 =begin
   test '' do

@@ -11,6 +11,21 @@ module Motion
         parse
       end
       
+      def context
+        lines = []
+        lines << "@interface #{@class_name} : #{@super_name || 'NSObject'}"
+        properties.each do |k, v|
+          if v[:readonly]
+            lines << "@property (strong, nonatomic, readonly) #{type_name_of v[:type]}#{k};"
+          else
+            lines << "@property (strong, nonatomic) #{type_name_of v[:type]}#{k};"
+          end
+        end
+        lines << "@end"
+        lines << ""
+        lines.join "\n"
+      end
+      
       private
       
       def parse
@@ -41,6 +56,10 @@ module Motion
         else
           "#{t} *"
         end
+      end
+      
+      def type_name_of type
+        type == "id" ? "id " : type
       end
       
     end
