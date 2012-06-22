@@ -4,6 +4,26 @@ module Motion
 
     class IbHeader
     
+    
+      class << self
+      
+        def generate
+          project_dir = Dir.pwd
+          dst_dir = File.join project_dir, "tmp", "header"
+          FileUtils.mkdir_p dst_dir
+          Dir.glob("app/**/*.rb") do |f|
+            ib = self.new
+            ib.source = File.read(f)
+            dst_name = ib.dst_name_of f
+            dst = File.join(dst_dir, dst_name)
+            FileUtils.mkdir_p File.dirname(dst)
+            File.open(dst, "w") do |f|
+              f.write(ib.context)
+            end
+          end
+        end
+      end
+      
       attr_reader :class_name, :super_name, :properties
       
       def source= source
@@ -24,6 +44,13 @@ module Motion
         lines << "@end"
         lines << ""
         lines.join "\n"
+      end
+      
+      def dst_name_of path
+        a = path.split("/")
+        a.pop
+        a << "#{class_name}.h"
+        a.join("/")
       end
       
       private

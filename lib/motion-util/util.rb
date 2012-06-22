@@ -30,6 +30,8 @@ Usage:
         case ARGV[0]
         when "generate", "generator", "g"
           cmd = Generator.new
+        when "ib_header", "ibh"
+          IBHeader.generate
         end
         if cmd
           cmd.run

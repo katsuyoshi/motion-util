@@ -2,16 +2,6 @@
 require 'test-unit'
 require 'motion-util'
 
-=begin
-class IbHeaderStub < IbHeader
-
-  def source= source
-    @source = source
-  end
-  
-end
-=end
-
 include Motion::Util
 
 class TestIbHeader < Test::Unit::TestCase
@@ -80,21 +70,46 @@ end
     assert_equal expected, @ib.context
   end
   
-=begin
-  test '' do
-    assert_equal { foo: :id, bar: :id, hoge: :NSMutableString }, simple_source.properties }
-    
+  test "dst_name_of" do
+    @ib.source = "class AppDelegate"
+    assert_equal "app/AppDelegate.h", @ib.dst_name_of("app/app_delegate.rb")
   end
   
 
-#=begin
+end
+
+
+class TestIbHeaderGenerate < Test::Unit::TestCase
+
+  def setup
+    @original_dir = File.expand_path Dir.pwd
+    dst_dir = File.join @original_dir, "tmp"
+    FileUtils.mkdir_p dst_dir
+    Dir.chdir dst_dir
+    `motion create sample`
+    Dir.chdir "sample"
+    IbHeader.generate
+  end
+
+  def teardown
+    Dir.chdir @original_dir
+    FileUtils.rm_rf File.join "tmp", "sample"
+  end
+  
+  test "AppDelegate.h should be generated" do
+    assert File.exist?("tmp/header/app/AppDelegate.h")
+  end
+  
+  test "AppDelegate.h's context should be" do
     expected = <<-EOF
-@interface Foo : Bar
-@property (strong, nonatomic) id foo;
-@property (strong, nonatomic) id bar;
-@property (strong, nonatomic) NSMutableString hoge;
+@interface AppDelegate : NSObject
 @end
     EOF
-=end
 
+    assert_equal expected, File.read("tmp/header/app/AppDelegate.h")
+  end
+  
+  
 end
+
+

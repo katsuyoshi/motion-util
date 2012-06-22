@@ -5,3 +5,4 @@ pkg/*
 .DS_Store
 *.xcworkspace
 .rvmrc
+tmp
