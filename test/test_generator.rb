@@ -150,5 +150,20 @@ end
     assert_equal expected, @generator.spec_context
   end
   
+  test "check view controller spec file context" do
+    ARGV.replace %w(generate view_controller foo)
+    expected = <<-EOF
+# -*- coding: utf-8 -*-
+describe FooViewController do
+
+  it "should be successful" do
+    true.should == true
+  end
+
+end
+    EOF
+    assert_equal expected, @generator.spec_context
+  end
+  
 end
 
