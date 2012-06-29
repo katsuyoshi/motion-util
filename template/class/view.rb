@@ -27,5 +27,11 @@ class #{class_name}View < UIView
   end
 =end
 
+=begin
+  def shouldAutorotateToInterfaceOrientation interfaceOrientation
+    interfaceOrientation == UIInterfaceOrientationPortrait
+  end
+=end
+
 end
 
