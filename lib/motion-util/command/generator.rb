@@ -24,7 +24,7 @@ module Motion
       
       def destination_path
         case file_type
-        when /controller/
+        when /controller/, /view/
           "#{destination_dir}/#{class_file_name}_#{file_type}.rb"
         else
           "#{destination_dir}/#{class_file_name}.rb"
