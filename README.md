@@ -12,7 +12,7 @@ Installation
 Usage
 ===
 
-Generate class file.  
+### Generate class file.  
 
         motion-util generate model Foo  
         motion-util generate controller Foo  
@@ -26,7 +26,7 @@ Generate class file.
         motion-util g model Foo  
         motion-util generation model Foo  
 
-Generate Objective-C header file for Interface Builder.
+### Generate Objective-C header file for Interface Builder.
   
        motion-util ib_header
 
@@ -34,7 +34,8 @@ Generate Objective-C header file for Interface Builder.
         motion-util ibh  
 
         
-        Your ruby motion class:
+Your ruby motion class:  
+
 <pre>
 # app_delegate.rb
 class AppDelegate
@@ -50,10 +51,10 @@ class AppDelegate
 end
 </pre>
 
-        @type_info is a marker to describe a class by Objective-C.  
-        If it's not specified it will be id type.
-
-        After execute 'motion-util ibh', AppDelegate.h was generated in tmp/header directory like this.
+@type_info is a marker to describe a class by Objective-C.  
+If it's not specified it will be id type.  
+  
+After execution 'motion-util ibh', AppDelegate.h was generated in tmp/header directory like this.  
 
 <pre>
 // AppDelegate.h
