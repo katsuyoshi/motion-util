@@ -24,7 +24,7 @@ module Motion
       
       def destination_path
         case file_type
-        when /controller/
+        when /controller/, /view/
           "#{destination_dir}/#{class_file_name}_#{file_type}.rb"
         else
           "#{destination_dir}/#{class_file_name}.rb"
@@ -45,6 +45,7 @@ module Motion
       def spec_context
         c = File.read File.join(@template_dir, "spec", "spec.rb")
         c.gsub! /#\{class_name\}/, class_name
+        c.gsub! /#\{camelized_file_type\}/, camelized_file_type
         c
       end
 
@@ -100,6 +101,15 @@ module Motion
           @class_name = ARGV[2].capitalize
         end if @class_name.nil?
         @class_name
+      end
+      
+      def camelized_file_type
+        case file_type
+        when "general", "model"
+          ""
+        else
+          @file_type.split('_').map{|e| e.capitalize}.join('')
+        end
       end
       
       def class_file_name
