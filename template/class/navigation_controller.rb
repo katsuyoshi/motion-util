@@ -31,4 +31,16 @@ class #{class_name}NavigationController < UINavigationController
   end
 =end
 
+=begin
+  def shouldAutorotate
+    true
+  end
+=end
+
+=begin
+  def supportedInterfaceOrientations
+    UIInterfaceOrientationMaskPortrait
+  end
+=end
+
 end

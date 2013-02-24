@@ -31,5 +31,16 @@ class #{class_name}TabBarController < UITabBarController
   end
 =end
 
+=begin
+  def shouldAutorotate
+    true
+  end
+=end
+
+=begin
+  def supportedInterfaceOrientations
+    UIInterfaceOrientationMaskPortrait
+  end
+=end
 
 end

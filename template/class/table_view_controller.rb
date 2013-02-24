@@ -39,6 +39,18 @@ class #{class_name}TableViewController < UITableViewController
   end
 =end
 
+=begin
+  def shouldAutorotate
+    true
+  end
+=end
+
+=begin
+  def supportedInterfaceOrientations
+    UIInterfaceOrientationMaskPortrait
+  end
+=end
+
 
 =begin
   def numberOfSectionsInTableView tableView
@@ -62,9 +74,33 @@ class #{class_name}TableViewController < UITableViewController
   end
 =end
 
+=begine
+  def tableView tableView, didSelectRowAtIndexPath:indexPath
+    tableView.deselectRowAtIndexPath indexPath, animated:true
+  end
+=end
+
 =begin
   def tableView tableView, canEditRowAtIndexPath:indexPath
     true
+  end
+=end
+
+=begine
+  def tableView tableView, editingStyleForRowAtIndexPath:indexPath
+    UITableViewCellEditingStyleDelete
+  end
+=end
+
+=begin
+  def tableView tableView, canMoveRowAtIndexPath:indexPath
+    true
+  end
+=end
+
+=begin
+  def tableView tableView, moveRowAtIndexPath:fromIndexPath, toIndexPath:toIndexPath
+    toIndexPath
   end
 =end
   
@@ -79,15 +115,4 @@ class #{class_name}TableViewController < UITableViewController
   end
 =end
   
-=begin
-  def tableView tableView, moveRowAtIndexPath:fromIndexPath, toIndexPath:toIndexPath
-  end
-=end
-  
-=begin
-  def tableView tableView, canMoveRowAtIndexPath:indexPath
-    true
-  end
-=end
-
 end
