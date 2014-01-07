@@ -19,6 +19,12 @@ class #{class_name}TabBarController < UITabBarController
   end
 =end
 
+=begin
+  def viewDidAppear animated
+    super
+  end
+=end
+
 =begin  
   def viewWillDisappear animated
     super
@@ -26,10 +32,27 @@ class #{class_name}TabBarController < UITabBarController
 =end
   
 =begin
+  def viewDidDisappear animated
+    super
+  end
+=end
+
+=begin
   def shouldAutorotateToInterfaceOrientation interfaceOrientation
     interfaceOrientation == UIInterfaceOrientationPortrait
   end
 =end
 
+=begin
+  def shouldAutorotate
+    true
+  end
+=end
+
+=begin
+  def supportedInterfaceOrientations
+    UIInterfaceOrientationMaskPortrait
+  end
+=end
 
 end

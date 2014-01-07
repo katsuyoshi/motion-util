@@ -4,6 +4,12 @@ require 'motion-util'
 
 
 include Motion::Util
+class Generator
+  def get_objc_class_name
+    objc_class_name
+  end
+end
+
 
 class TestGenerate < Test::Unit::TestCase
 
@@ -167,6 +173,10 @@ end
     EOF
     assert_equal expected, @generator.spec_context
   end
-  
+
+  test "check objc class name" do
+    ARGV.replace %w(generate model foo_bar)
+    assert_equal "FooBar", @generator.get_objc_class_name
+  end
 end
 

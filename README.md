@@ -48,6 +48,10 @@ class AppDelegate
     @window.makeKeyAndVisible
     true
   end
+  
+  def showDialog sender    # IBAction
+  end
+
 end
 </pre>
 
@@ -61,6 +65,7 @@ After execution 'motion-util ibh', AppDelegate.h was generated in tmp/header dir
 @interface AppDelegate : NSObject
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (strong, nonatomic) IBOutlet UIViewController *controller;
+- (IBAction)showDialog:(id)sender;
 @end
 </pre>
 
