@@ -56,6 +56,8 @@ class Foo
   attr_accessor :foo # no type
   attr_accessor :bar # @type_info UILabel
   attr_reader :hoge # @type_info UIView
+  def action sender # IBAction
+  end
 end
     EOF
     
@@ -64,6 +66,7 @@ end
 @property (strong, nonatomic) IBOutlet id foo;
 @property (strong, nonatomic) IBOutlet UILabel *bar;
 @property (strong, nonatomic, readonly) IBOutlet UIView *hoge;
+- (IBAction)action:(id)sender;
 @end
     EOF
     

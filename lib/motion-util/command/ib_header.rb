@@ -22,7 +22,7 @@ module Motion
     
     class IbHeader
     
-      attr_reader :class_name, :super_name, :properties
+      attr_reader :class_name, :super_name, :properties, :actions
       
       def source= source
         @source = source
@@ -32,6 +32,7 @@ module Motion
       def context
         lines = []
         lines << "@interface #{@class_name} : #{@super_name || 'NSObject'}"
+        
         properties.each do |k, v|
           if v[:readonly]
             lines << "@property (strong, nonatomic, readonly) IBOutlet #{type_name_of v[:type]}#{k};"
@@ -39,6 +40,11 @@ module Motion
             lines << "@property (strong, nonatomic) IBOutlet #{type_name_of v[:type]}#{k};"
           end
         end
+        
+        actions.each do |a|
+          lines << "- (IBAction)#{a[0]}:(id)#{a[1]};"
+        end
+        
         lines << "@end"
         lines << ""
         lines.join "\n"
@@ -59,14 +65,24 @@ module Motion
         @super_name = $3
         
         @properties = {}
+        @actions = []
         @source.split("\n").each do |l|
-          /(attr_accessor|attr_reader)\s+([A-Za-z0-9:, ]+)(#\s*(@type_info\s+(\w+)?)?)?/ =~ l
-          type = type_of $5
-          $2.split(",").each do |p|
-            p = eval(p.strip)
-            @properties[p] = { type:type }
-            @properties[p].merge!(readonly:true) if $1 == "attr_reader"
-          end if $2
+          
+          case l
+          
+          # property
+          when /(attr_accessor|attr_reader)\s+([A-Za-z0-9:, ]+)(#\s*(@type_info\s+(\w+)?)?)?/
+            type = type_of $5
+            $2.split(",").each do |p|
+              p = eval(p.strip)
+              @properties[p] = { type:type }
+              @properties[p].merge!(readonly:true) if $1 == "attr_reader"
+            end if $2
+          
+          # action
+          when /def\s+(.+)\s+(.+)\s+#\s*IBAction/
+            actions << [$1, $2]
+          end
         end
       end
       
