@@ -27,12 +27,24 @@ class #{class_name}TableViewController < UITableViewController
   end
 =end
 
+=begin
+  def viewDidAppear animated
+    super
+  end
+=end
+
 =begin  
   def viewWillDisappear animated
     super
   end
 =end
   
+=begin
+  def viewDidDisappear animated
+    super
+  end
+=end
+
 =begin
   def shouldAutorotateToInterfaceOrientation interfaceOrientation
     interfaceOrientation == UIInterfaceOrientationPortrait
@@ -65,10 +77,15 @@ class #{class_name}TableViewController < UITableViewController
 =end
 
 =begin
+  def tableView tableView, titleForHeaderInSection:section
+    nil
+  end
+=end  
+
+=begin
   CellIdentifier = "Cell"
   def tableView tableView, cellForRowAtIndexPath:indexPath
-    cell = tableView.dequeueReusableCellWithIdentifier CellIdentifier
-    cell ||= UITableViewCell.alloc.initWithStyle UITableViewCellStyleDefault, reuseIdentifier:CellIdentifier
+    cell = tableView.dequeueReusableCellWithIdentifier CellIdentifier, forIndexPath:indexPath
     cell.textLabel.text = "Ruby Motion"
     cell
   end

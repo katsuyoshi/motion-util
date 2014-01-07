@@ -19,12 +19,24 @@ class #{class_name}NavigationController < UINavigationController
   end
 =end
 
+=begin
+  def viewDidAppear animated
+    super
+  end
+=end
+
 =begin  
   def viewWillDisappear animated
     super
   end
 =end
   
+=begin
+  def viewDidDisappear animated
+    super
+  end
+=end
+
 =begin
   def shouldAutorotateToInterfaceOrientation interfaceOrientation
     interfaceOrientation == UIInterfaceOrientationPortrait
