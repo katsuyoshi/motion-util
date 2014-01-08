@@ -91,7 +91,7 @@ class #{class_name}TableViewController < UITableViewController
   end
 =end
 
-=begine
+=begin
   def tableView tableView, didSelectRowAtIndexPath:indexPath
     tableView.deselectRowAtIndexPath indexPath, animated:true
   end
@@ -103,7 +103,7 @@ class #{class_name}TableViewController < UITableViewController
   end
 =end
 
-=begine
+=begin
   def tableView tableView, editingStyleForRowAtIndexPath:indexPath
     UITableViewCellEditingStyleDelete
   end
