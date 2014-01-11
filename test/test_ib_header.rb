@@ -55,7 +55,7 @@ class TestIbHeader < Test::Unit::TestCase
 class Foo
   attr_accessor :foo # no type
   attr_accessor :bar # @type_info UILabel
-  attr_reader :hoge # @type_info UIView
+  attr_reader :hoge # IBOutlet UIView
   def action sender # IBAction
   end
   def didChangeValue sender     # IBAction

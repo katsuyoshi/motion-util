@@ -71,8 +71,8 @@ module Motion
           case l
           
           # property
-          when /(attr_accessor|attr_reader)\s+([A-Za-z0-9:, ]+)(#\s*(@type_info\s+(\w+)?)?)?/
-            type = type_of $5
+          when /(attr_accessor|attr_reader)\s+([A-Za-z0-9:, ]+)(#\s*((@type_info|IBOutlet)\s+(\w+)?)?)?/
+            type = type_of $6
             $2.split(",").each do |p|
               p = eval(p.strip)
               @properties[p] = { type:type }
