@@ -58,6 +58,8 @@ class Foo
   attr_reader :hoge # @type_info UIView
   def action sender # IBAction
   end
+  def didChangeValue sender     # IBAction
+  end
 end
     EOF
     
@@ -67,6 +69,7 @@ end
 @property (strong, nonatomic) IBOutlet UILabel *bar;
 @property (strong, nonatomic, readonly) IBOutlet UIView *hoge;
 - (IBAction)action:(id)sender;
+- (IBAction)didChangeValue:(id)sender;
 @end
     EOF
     

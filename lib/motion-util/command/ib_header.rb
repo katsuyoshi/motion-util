@@ -80,7 +80,7 @@ module Motion
             end if $2
           
           # action
-          when /def\s+(.+)\s+(.+)\s+#\s*IBAction/
+          when /def\s+(.+?)\s+(.+?)\s+#\s*IBAction/
             actions << [$1, $2]
           end
         end
