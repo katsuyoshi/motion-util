@@ -40,8 +40,8 @@ Your ruby motion class:
 # app_delegate.rb
 class AppDelegate
 
-  attr_accessor :window     # @type_info UIWindow
-  attr_accessor :controller # @type_info UIViewController
+  attr_accessor :window     # IBOutlet UIWindow
+  attr_accessor :controller # IBOutlet UIViewController
   
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window.rootViewController = @controller
@@ -55,9 +55,12 @@ class AppDelegate
 end
 </pre>
 
-@type_info is a marker to describe a class by Objective-C.  
-If it's not specified it will be id type.  
-  
+IBOutlet is a marker to describe a class by Objective-C.  
+If it's not specified it will be id type.
+(@type_info is deprecated. Instead use IBOutlet.)  
+
+IBAction is a marker to describe an action method.
+
 After execution 'motion-util ibh', AppDelegate.h was generated in tmp/header directory like this.  
 
 <pre>

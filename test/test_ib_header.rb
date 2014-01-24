@@ -55,8 +55,10 @@ class TestIbHeader < Test::Unit::TestCase
 class Foo
   attr_accessor :foo # no type
   attr_accessor :bar # @type_info UILabel
-  attr_reader :hoge # @type_info UIView
+  attr_reader :hoge # IBOutlet UIView
   def action sender # IBAction
+  end
+  def didChangeValue sender     # IBAction
   end
 end
     EOF
@@ -67,6 +69,7 @@ end
 @property (strong, nonatomic) IBOutlet UILabel *bar;
 @property (strong, nonatomic, readonly) IBOutlet UIView *hoge;
 - (IBAction)action:(id)sender;
+- (IBAction)didChangeValue:(id)sender;
 @end
     EOF
     
