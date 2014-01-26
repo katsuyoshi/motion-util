@@ -7,7 +7,7 @@ module Motion
         project_dir = Dir.pwd
         dst_dir = File.join project_dir, "tmp", "header"
         FileUtils.mkdir_p dst_dir
-        Dir.glob("app/**/*.rb") do |f|
+        Dir.glob(["app/**/*.rb", "lib/**/*.rb"]) do |f|
           ib = IbHeader.new
           ib.source = File.read(f)
           dst_name = ib.dst_name_of f
